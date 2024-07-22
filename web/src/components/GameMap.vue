@@ -1,20 +1,19 @@
 <template>
     <div ref="parent" class="gamemap">
         <canvas ref="canvas">
-
         </canvas>
     </div>
 </template>
 
 <script>
 import {GameMap} from "@/assets/scripts/GameMap";
-import {ref,onMouted} from 'vue'
+import {ref, onMounted} from 'vue'
 export default{
     setup() {
         let parent = ref(null);
         let canvas = ref(null);
 
-        onMouted(() => {
+        onMounted(() => {
             new GameMap(canvas.value.getContext('2d'),parent.value)
         });
         return{
@@ -29,5 +28,9 @@ export default{
 div.gamemap{
     width:100%;
     height:100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+
 }
 </style>
