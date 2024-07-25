@@ -73,6 +73,7 @@ export class GameMap extends AcGameObject{
     }
     add_listening_events(){
         this.ctx.canvas.focus();
+        
         const [snake0,snake1]=this.snakes;
         this.ctx.canvas.addEventListener("keydown", e=> {
             if(e.key==='w') snake0.set_direction(0);
@@ -86,28 +87,46 @@ export class GameMap extends AcGameObject{
         });//获取用户信息
     }
     start(){
-        for(let i = 0; i < 1000;i ++)
+        for(let i = 0; i < 1000;i ++ )
             if(this.create_walls())
                 break;
 
         this.add_listening_events();
     }
     update_size(){
-        this.L=parseInt(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight/ this.rows));
+        this.L = parseInt(Math.min(this.parent.clientWidth / this.cols, this.parent.clientHeight/ this.rows));
         this.ctx.canvas.width = this.L * this.cols;
         this.ctx.canvas.height = this.L * this.rows;
     }
-    check_ready(){//判断两条蛇是否都准备好下一回合
+    check_ready(){  //判断两条蛇是否都准备好下一回合
         for(const snake of this.snakes){
-            if(snake.status !== "idle") return false;//不是静止，不能进行下一回合
-            if(snake.direction === -1) return false;//没有接收到下一步指令，不能进行下一回合
+            if(snake.status !== "idle") return false;  //不是静止，不能进行下一回合
+            if(snake.direction === -1) return false;  //没有接收到下一步指令，不能进行下一回合
         }
         return true;
     }
-    next_step(){// 让两条蛇进入下一回合
+    next_step(){  // 让两条蛇进入下一回合
         for(const snake of this.snakes){
             snake.next_step();
         }
+    }
+    check_valid(cell){  //检测目标位置是否是合法的
+        for(const wall of this.walls){  // in下标，of数值
+            if(wall.r === cell.r && wall.c === cell.c)  //撞上墙了
+                return false;
+        }
+        for(const snake of this.snakes){  //单独判断蛇尾的操作
+            let k = snake.cells.length;
+            if(!snake.check_tail_increasing()){  //蛇的长度不增加，即蛇尾会前进，蛇尾不要判断
+                k --;
+            } 
+            for(let i = 0 ;i < k; i ++ ){  //枚举每个位置
+                if(snake.cells[i].r === cell.r && snake.cells[i].c === cell.c){  //撞上蛇了
+                        return false; 
+                }
+            } 
+        }
+        return true;
     }
     update(){
         this.update_size();
