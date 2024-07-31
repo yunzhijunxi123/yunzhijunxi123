@@ -71,11 +71,19 @@ export class GameMap extends AcGameObject{
         }
         return true;
     }
+<<<<<<< HEAD
     add_listening_events(){  //获取用户输入
         this.ctx.canvas.focus();  //将canvas聚焦
         
         const [snake0,snake1] = this.snakes;
         this.ctx.canvas.addEventListener("keydown", e=> {  //获取键盘输入
+=======
+    add_listening_events(){
+        this.ctx.canvas.focus();
+        
+        const [snake0,snake1]=this.snakes;
+        this.ctx.canvas.addEventListener("keydown", e=> {
+>>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
             if(e.key==='w') snake0.set_direction(0);
             else if(e.key==='d') snake0.set_direction(1);
             else if(e.key==='s') snake0.set_direction(2);
@@ -99,7 +107,11 @@ export class GameMap extends AcGameObject{
         this.ctx.canvas.height = this.L * this.rows;
     }
     check_ready(){  //判断两条蛇是否都准备好下一回合
+<<<<<<< HEAD
         for(const snake of this.snakes){  //枚举每条蛇
+=======
+        for(const snake of this.snakes){
+>>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
             if(snake.status !== "idle") return false;  //不是静止，不能进行下一回合
             if(snake.direction === -1) return false;  //没有接收到下一步指令，不能进行下一回合
         }
