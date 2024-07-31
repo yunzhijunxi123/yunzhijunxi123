@@ -3,7 +3,7 @@ package com.kob.backend03.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.kob.backend03.mapper.UserMapper;
 import com.kob.backend03.pojo.User;
-import com.kob.backend03.service.impl.utils.UserDetailImpl;
+import com.kob.backend03.service.impl.utils.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
  * @author shan
  * @version 1.0
  */
-public class UserDetailServiceImpl implements UserDetailsService {
+
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserMapper userMapper;
@@ -29,6 +30,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
         if(user==null){
             throw new RuntimeException("用户不存在");
         }
-        return new UserDetailImpl();
+        return new UserDetailsImpl(user);
     }
 }
