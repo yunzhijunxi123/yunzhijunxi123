@@ -1,18 +1,18 @@
 <template>
     <ContentField>
-        我的bot
+            登录
     </ContentField>
 </template>
 <script>
     import ContentField from '../../../components/ContentField.vue'
-    
+
     export default {
-     components: {
-        ContentField
-        }
-   }
+            components: {
+                    ContentField
+            }
+    }
 </script>
-    
+
 <style scoped>
 
 </style>

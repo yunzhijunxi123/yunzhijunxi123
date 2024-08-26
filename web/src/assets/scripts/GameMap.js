@@ -14,8 +14,8 @@ export class GameMap extends AcGameObject{
         this.cols=14;
         this.inner_walls_count = 20;
         this.walls= [];
-        this.snakes=[  //创建两条蛇
-            new Snake({id: 0,color:"#4876EC",r:this.rows-2,c:1}, this),  //id,颜色，初始横坐标，初始纵坐标
+        this.snakes=[
+            new Snake({id: 0,color:"#4876EC",r:this.rows-2,c:1}, this),
             new Snake({id: 1,color:"#F94848",r:1,c:this.cols-2}, this),
         ]
     }
@@ -51,7 +51,7 @@ export class GameMap extends AcGameObject{
             for(let j = 0;j < 1000 ; j++){
                 let r = parseInt(Math.random() * this.rows);
                 let c = parseInt(Math.random() * this.cols);
-                if(g[r][c]||g[this.rows-1-r][this.cols-1-c]) continue;  //使障碍物对称
+                if(g[r][c]||g[this.rows-1-r][this.cols-1-c]) continue;
                 if(r == this.rows-2 &&c == 1 || r==1 && c==this.cols-2) 
                     continue;
                 g[r][c] = g[this.rows-1-r][this.cols-1-c] = true;
@@ -71,19 +71,11 @@ export class GameMap extends AcGameObject{
         }
         return true;
     }
-<<<<<<< HEAD
-    add_listening_events(){  //获取用户输入
-        this.ctx.canvas.focus();  //将canvas聚焦
-        
-        const [snake0,snake1] = this.snakes;
-        this.ctx.canvas.addEventListener("keydown", e=> {  //获取键盘输入
-=======
     add_listening_events(){
         this.ctx.canvas.focus();
         
         const [snake0,snake1]=this.snakes;
         this.ctx.canvas.addEventListener("keydown", e=> {
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
             if(e.key==='w') snake0.set_direction(0);
             else if(e.key==='d') snake0.set_direction(1);
             else if(e.key==='s') snake0.set_direction(2);
@@ -92,7 +84,7 @@ export class GameMap extends AcGameObject{
             else if(e.key==='ArrowRight') snake1.set_direction(1);
             else if(e.key==='ArrowDown') snake1.set_direction(2);
             else if(e.key==='ArrowLeft') snake1.set_direction(3);
-        });
+        });//获取用户信息
     }
     start(){
         for(let i = 0; i < 1000;i ++ )
@@ -107,11 +99,7 @@ export class GameMap extends AcGameObject{
         this.ctx.canvas.height = this.L * this.rows;
     }
     check_ready(){  //判断两条蛇是否都准备好下一回合
-<<<<<<< HEAD
-        for(const snake of this.snakes){  //枚举每条蛇
-=======
         for(const snake of this.snakes){
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
             if(snake.status !== "idle") return false;  //不是静止，不能进行下一回合
             if(snake.direction === -1) return false;  //没有接收到下一步指令，不能进行下一回合
         }

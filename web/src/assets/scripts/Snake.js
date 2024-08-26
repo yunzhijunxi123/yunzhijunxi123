@@ -2,11 +2,7 @@ import { AcGameObject } from "./AcGameObject";
 import { Cell } from "./Cell";  //定义蛇里面的一个格子
 
 
-<<<<<<< HEAD
-export class Snake extends AcGameObject{  //定义蛇
-=======
 export class Snake extends AcGameObject{
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
     constructor(info, gamemap){
         super();
 
@@ -58,19 +54,11 @@ export class Snake extends AcGameObject{
         const d = this.direction;
         this.next_cell = new Cell(this.cells[0].r + this.dr[d], this.cells[0].c + this.dc[d]);  //蛇头行数加偏移行数，蛇头列数加偏移列数
         this.eye_direction = d;
-<<<<<<< HEAD
-        this.direction = -1;  //清空操作
-        this.status = "move";
-        this.step ++ ;
-
-        const k = this.cells.length;  //求所有小球数量
-=======
         this.direction = -1;  //q清空操作
         this.status = "move";
         this.step ++ ;
 
         const k = this.cells.length;
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
         for(let i = k;i > 0;i --){
             this.cells[i] = JSON.parse(JSON.stringify(this.cells[i-1]));  //把每个小球向后移一位，先转化成JSON，再剪切掉
         }
@@ -79,17 +67,12 @@ export class Snake extends AcGameObject{
             this.status = "die";
         }
 
-<<<<<<< HEAD
-    }
-    update_move(){  //更新移动
-=======
         if(!this.gamemap.check_valid(this.next_cell)){  //下一步操作撞了，蛇死亡
             this.status = "die";
         }
 
     }
     update_move(){
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
         const dx = this.next_cell.x - this.cells[0].x;
         const dy = this.next_cell.y - this.cells[0].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -132,15 +115,9 @@ export class Snake extends AcGameObject{
         if(this.status === "die"){
             ctx.fillStyle = "white";
         }
-<<<<<<< HEAD
-        for(const cell of this.cells){  //枚举蛇的每个部分，of数值，in下标
-            ctx.beginPath();  //开启路径
-            ctx.arc(cell.x*L,cell.y*L,L/2*0.8,0,Math.PI*2);  //画圆弧 圆的中心点横纵坐标，圆的半径，起始角度，终止角度
-=======
         for(const cell of this.cells){
             ctx.beginPath();
             ctx.arc(cell.x*L,cell.y*L,L/2*0.8,0,Math.PI*2);
->>>>>>> 3ebe2914b42ee57f23396084462501d4ceec5d92
             ctx.fill();
         }
 
